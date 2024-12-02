@@ -1,0 +1,22 @@
+purpose:
+
+stdout: normal program output
+stderr: error messages and diagnostics
+
+behavior:
+
+stdout can be redirected or piped or saved to a file
+stderr allows separate handling of error messages
+both can be redirected independently
+
+usecases:
+
+stdout: program results, data processing output
+stderr: error logs, diagnostic information
+
+examples:
+    stdout:
+        ls > output_ls.txt
+
+    stderr:
+        cat /etc/shadow 2> errors.txt
