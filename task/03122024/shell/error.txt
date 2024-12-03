@@ -1,0 +1,2 @@
+bash: asdasd: command not found
+'cat' without arguments is not allowed

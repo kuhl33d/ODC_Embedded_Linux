@@ -1,0 +1,6 @@
+ls ::
+cmd
+error.txt
+interactive_script.sh
+interactive_script_improved.sh
+out.txt
