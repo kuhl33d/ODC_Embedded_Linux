@@ -3,20 +3,25 @@
 system-monitor/
 ├── kernel_module/
 │   ├── Makefile
-│   └── system_monitor.c
+│   ├── module_control.sh
+│   ├── system_monitor.c
+│   └── README.md
 ├── daemon/
 │   ├── requirements.txt
-│   └── monitor_daemon.py
+│   ├── monitor_daemon.py
+│   └── README.md
 ├── ui/
 │   ├── tui/
-│   │   └── monitor_tui.py
+│   │   ├── monitor_tui.py
+│   │   └── README.md
 │   └── web/
 │       ├── static/
 │       │   ├── css/
 │       │   │   └── style.css
 │       │   └── js/
 │       │       └── monitor.js
-│       └── index.html
+│       ├── index.html
+│       └── README.md
 ├── README.md
 └── setup.sh
 ```
