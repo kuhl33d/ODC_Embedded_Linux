@@ -1,0 +1,4 @@
+# daemon/requirements.txt
+websockets==10.4
+asyncio==3.4.3
+typing-extensions==4.5.0
