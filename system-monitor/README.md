@@ -1,29 +1,43 @@
 # Real-Time System Monitor
 ```
 system-monitor/
+├── README.md
+├── daemon/
+│   ├── README.md
+│   ├── install.sh
+│   ├── monitor_daemon.py
+│   ├── requirements.txt
+│   ├── system-monitor.service
+│   └── uninstall.sh
 ├── kernel_module/
 │   ├── Makefile
+│   ├── README.md
 │   ├── module_control.sh
-│   ├── system_monitor.c
-│   └── README.md
-├── daemon/
-│   ├── requirements.txt
-│   ├── monitor_daemon.py
-│   └── README.md
-├── ui/
-│   ├── tui/
-│   │   ├── monitor_tui.py
-│   │   └── README.md
-│   └── web/
-│       ├── static/
-│       │   ├── css/
-│       │   │   └── style.css
-│       │   └── js/
-│       │       └── monitor.js
-│       ├── index.html
-│       └── README.md
-├── README.md
-└── setup.sh
+│   └── system_monitor.c
+├── setup.sh
+├── tests/
+│   ├── build.sh
+│   ├── debug_module.sh
+│   ├── test_client.py
+│   ├── test_netlink
+│   └── test_netlink.c
+└── ui/
+    ├── tui/
+    │   ├── README.md
+    │   ├── monitor_tui.log
+    │   ├── monitor_tui.py
+    │   └── monitor_tui.v2.py
+    └── web/
+        ├── README.md
+        ├── index.html
+        ├── server.py
+        └── static/
+            ├── css/
+            │   └── style.css
+            └── js/
+                └── monitor.js
+
+9 directories, 26 files
 ```
 A comprehensive system monitoring solution with kernel-level metrics collection, featuring both Terminal UI and Web UI interfaces. This project demonstrates real-time system metrics collection and visualization using Linux kernel modules, WebSocket communication, and modern UI frameworks.
 
