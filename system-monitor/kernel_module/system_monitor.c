@@ -1,4 +1,3 @@
-// kernel_module/system_monitor.c
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/netlink.h>
@@ -24,109 +23,107 @@
 #include <linux/mm_types.h>
 #include <linux/mmzone.h>
 
-#define NETLINK_USER 31
+#define NETLINK_TEST 31
 #define MAX_PROCESSES 100
+#define MAX_PAYLOAD 8620
 
-// Process state definitions
-#define PROCESS_RUNNING 'R'
-#define PROCESS_SLEEPING 'S'
-#define PROCESS_DISK_SLEEP 'D'
-#define PROCESS_STOPPED 'T'
-#define PROCESS_ZOMBIE 'Z'
+// Debug macros
+#define DEBUG_PRINT(fmt, ...) \
+    pr_info("System Monitor: " fmt "\n", ##__VA_ARGS__)
+#define ERROR_PRINT(fmt, ...) \
+    pr_err("System Monitor Error: " fmt "\n", ##__VA_ARGS__)
 
-// Structure definitions
+// Ensure struct alignment
+#pragma pack(push, 1)
+
+// Process information structure
 struct process_info {
-    pid_t pid;
-    char comm[TASK_COMM_LEN];
-    unsigned long cpu_usage;
-    unsigned long mem_usage;
-    char state;
-    unsigned long priority;
-    unsigned long nice;
-    unsigned long num_threads;
-    unsigned long vsize;    // Virtual memory size
-    unsigned long rss;      // Resident Set Size
+    pid_t pid;                      // Process ID
+    unsigned long cpu_usage;        // CPU usage percentage
+    char comm[TASK_COMM_LEN];      // Process name
+    unsigned long mem_usage;        // Memory usage
+    long state;                     // Process state
+    unsigned long priority;         // Process priority
+    unsigned long nice;            // Nice value
 };
 
-struct system_metrics {
-    unsigned long cpu_usage[NR_CPUS];
-    unsigned long cpu_freq[NR_CPUS];
-    struct {
-        unsigned long total;
-        unsigned long used;
-        unsigned long free;
-        unsigned long shared;
-        unsigned long buffers;
-        unsigned long cached;
-        unsigned long available;
-        unsigned long swap_total;
-        unsigned long swap_free;
-    } memory;
-    struct process_info processes[MAX_PROCESSES];
-    int process_count;
-    unsigned long timestamp;
-    struct {
-        unsigned long pgpgin;
-        unsigned long pgpgout;
-        unsigned long pswpin;
-        unsigned long pswpout;
-    } io_stats;
+// Memory information structure
+struct memory_info {
+    unsigned long total;
+    unsigned long used;
+    unsigned long free;
+    unsigned long cached;
+    unsigned long available;
+    unsigned long buffers;
 };
+
+// Main metrics structure
+struct system_metrics {
+    unsigned long cpu_usage[32];    // Per-CPU usage
+    struct memory_info memory;      // Memory information
+    struct process_info processes[MAX_PROCESSES];  // Process information
+    int process_count;              // Number of processes
+    unsigned long timestamp;        // Current timestamp
+};
+
+#pragma pack(pop)
 
 // Global variables
 static struct sock *nl_sk = NULL;
 static struct timer_list metrics_timer;
 static struct system_metrics *current_metrics = NULL;
 static DEFINE_SPINLOCK(metrics_lock);
-// Helper function to get CPU frequency
-static unsigned long get_cpu_freq(int cpu)
-{
-    unsigned long freq = 0;
-    struct cpufreq_policy *policy;
 
-    policy = cpufreq_cpu_get(cpu);
-    if (policy) {
-        freq = policy->cur;
-        cpufreq_cpu_put(policy);
-    }
-
-    return freq;
-}
+// Previous CPU statistics for delta calculation
+static struct kernel_cpustat prev_cpu_stat[NR_CPUS];
+static bool first_run = true;
 
 // Function to get CPU statistics
 static void get_cpu_stats(void)
 {
     int cpu;
+    struct kernel_cpustat curr_cpu_stat;
     u64 user, nice, system, idle, iowait, irq, softirq;
-    u64 total, busy;
-    
+    u64 total, idle_time, non_idle_time;
+
     for_each_possible_cpu(cpu) {
         if (cpu >= NR_CPUS)
             break;
 
-        // Get CPU frequency
-        current_metrics->cpu_freq[cpu] = get_cpu_freq(cpu);
+        curr_cpu_stat = kcpustat_cpu(cpu);
 
-        // Get CPU usage
-        user = kcpustat_cpu(cpu).cpustat[CPUTIME_USER];
-        nice = kcpustat_cpu(cpu).cpustat[CPUTIME_NICE];
-        system = kcpustat_cpu(cpu).cpustat[CPUTIME_SYSTEM];
-        idle = kcpustat_cpu(cpu).cpustat[CPUTIME_IDLE];
-        iowait = kcpustat_cpu(cpu).cpustat[CPUTIME_IOWAIT];
-        irq = kcpustat_cpu(cpu).cpustat[CPUTIME_IRQ];
-        softirq = kcpustat_cpu(cpu).cpustat[CPUTIME_SOFTIRQ];
+        if (!first_run) {
+            user = curr_cpu_stat.cpustat[CPUTIME_USER] - 
+                   prev_cpu_stat[cpu].cpustat[CPUTIME_USER];
+            nice = curr_cpu_stat.cpustat[CPUTIME_NICE] - 
+                   prev_cpu_stat[cpu].cpustat[CPUTIME_NICE];
+            system = curr_cpu_stat.cpustat[CPUTIME_SYSTEM] - 
+                    prev_cpu_stat[cpu].cpustat[CPUTIME_SYSTEM];
+            idle = curr_cpu_stat.cpustat[CPUTIME_IDLE] - 
+                   prev_cpu_stat[cpu].cpustat[CPUTIME_IDLE];
+            iowait = curr_cpu_stat.cpustat[CPUTIME_IOWAIT] - 
+                    prev_cpu_stat[cpu].cpustat[CPUTIME_IOWAIT];
+            irq = curr_cpu_stat.cpustat[CPUTIME_IRQ] - 
+                  prev_cpu_stat[cpu].cpustat[CPUTIME_IRQ];
+            softirq = curr_cpu_stat.cpustat[CPUTIME_SOFTIRQ] - 
+                     prev_cpu_stat[cpu].cpustat[CPUTIME_SOFTIRQ];
 
-        // Calculate total and busy time
-        total = user + nice + system + idle + iowait + irq + softirq;
-        busy = total - idle - iowait;
+            idle_time = idle + iowait;
+            non_idle_time = user + nice + system + irq + softirq;
+            total = idle_time + non_idle_time;
 
-        // Calculate percentage
-        if (total > 0) {
-            current_metrics->cpu_usage[cpu] = (busy * 100) / total;
-        } else {
-            current_metrics->cpu_usage[cpu] = 0;
+            if (total > 0) {
+                current_metrics->cpu_usage[cpu] = 
+                    (non_idle_time * 100) / total;
+            } else {
+                current_metrics->cpu_usage[cpu] = 0;
+            }
         }
+
+        prev_cpu_stat[cpu] = curr_cpu_stat;
     }
+
+    first_run = false;
 }
 
 // Function to get memory statistics
@@ -140,53 +137,28 @@ static void get_memory_stats(void)
 
     current_metrics->memory.total = si.totalram << PAGE_SHIFT;
     current_metrics->memory.free = si.freeram << PAGE_SHIFT;
-    current_metrics->memory.shared = si.sharedram << PAGE_SHIFT;
     current_metrics->memory.buffers = si.bufferram << PAGE_SHIFT;
     current_metrics->memory.cached = cached << PAGE_SHIFT;
-    current_metrics->memory.swap_total = si.totalswap << PAGE_SHIFT;
-    current_metrics->memory.swap_free = si.freeswap << PAGE_SHIFT;
+    current_metrics->memory.available = si_mem_available() << PAGE_SHIFT;
     
-    // Calculate used and available memory
     current_metrics->memory.used = current_metrics->memory.total -
                                  current_metrics->memory.free -
                                  current_metrics->memory.buffers -
                                  current_metrics->memory.cached;
-    
-    current_metrics->memory.available = si_mem_available() << PAGE_SHIFT;
 }
 
-// Function to get I/O statistics
-static void get_io_stats(void)
-{
-    struct sysinfo si;
-    si_meminfo(&si);
-
-    // File I/O statistics using vmstat counters
-    current_metrics->io_stats.pgpgin = 
-        global_node_page_state(NR_VM_ZONE_STAT_ITEMS + NR_VM_NODE_STAT_ITEMS);
-    current_metrics->io_stats.pgpgout = 
-        global_node_page_state(NR_FILE_DIRTY);
-
-    // Swap statistics from sysinfo
-    current_metrics->io_stats.pswpin = 
-        (si.totalswap - si.freeswap) >> (PAGE_SHIFT - 10);  // Convert to KB
-    current_metrics->io_stats.pswpout = 
-        si.totalswap >> (PAGE_SHIFT - 10);  // Convert to KB
-}
-// Function to get process state as char
+// Function to get process state
 static char get_task_state(struct task_struct *task)
 {
     if (task->__state & TASK_RUNNING)
-        return PROCESS_RUNNING;
+        return 'R';
     if (task->__state & TASK_UNINTERRUPTIBLE)
-        return PROCESS_DISK_SLEEP;
+        return 'D';
     if (task->__state & TASK_STOPPED)
-        return PROCESS_STOPPED;
-    if (task->__state & TASK_TRACED)
-        return PROCESS_STOPPED;
+        return 'T';
     if (task->exit_state & EXIT_ZOMBIE)
-        return PROCESS_ZOMBIE;
-    return PROCESS_SLEEPING;
+        return 'Z';
+    return 'S';
 }
 
 // Function to get process information
@@ -194,91 +166,115 @@ static void get_process_stats(void)
 {
     struct task_struct *task;
     int i = 0;
+    unsigned long flags;
 
     rcu_read_lock();
     for_each_process(task) {
         if (i >= MAX_PROCESSES)
             break;
 
+        get_task_struct(task);
+        
         current_metrics->processes[i].pid = task->pid;
         memcpy(current_metrics->processes[i].comm, task->comm, TASK_COMM_LEN);
         current_metrics->processes[i].state = get_task_state(task);
         current_metrics->processes[i].priority = task->prio;
         current_metrics->processes[i].nice = task_nice(task);
         
-        if (task->signal)
-            current_metrics->processes[i].num_threads = task->signal->nr_threads;
-        
         if (task->mm) {
-            current_metrics->processes[i].vsize = task->mm->total_vm << PAGE_SHIFT;
-            current_metrics->processes[i].rss = get_mm_rss(task->mm) << PAGE_SHIFT;
             current_metrics->processes[i].mem_usage = 
-                (current_metrics->processes[i].rss * 100UL) /
-                current_metrics->memory.total;
+                get_mm_rss(task->mm) << PAGE_SHIFT;
         }
 
+        // Calculate CPU usage based on task's time values
+        local_irq_save(flags);
         current_metrics->processes[i].cpu_usage = 
             (task->utime + task->stime) * 100UL /
             (jiffies - task->start_time + 1);
+        local_irq_restore(flags);
 
+        put_task_struct(task);
         i++;
     }
     rcu_read_unlock();
 
     current_metrics->process_count = i;
 }
+
 // Timer callback function
 static void metrics_timer_callback(struct timer_list *t)
 {
     struct sk_buff *skb;
     struct nlmsghdr *nlh;
+    int ret;
     
     spin_lock(&metrics_lock);
     
-    // Collect all metrics
+    // Collect metrics
     get_cpu_stats();
     get_memory_stats();
     get_process_stats();
-    get_io_stats();
     current_metrics->timestamp = ktime_get_real_seconds();
 
-    // Create new netlink message
-    skb = nlmsg_new(sizeof(struct system_metrics), GFP_ATOMIC);
-    if (skb) {
-        nlh = nlmsg_put(skb, 0, 0, NLMSG_DONE, 
-                        sizeof(struct system_metrics), 0);
-        if (nlh) {
-            memcpy(nlmsg_data(nlh), current_metrics, 
-                   sizeof(struct system_metrics));
-            netlink_broadcast(nl_sk, skb, 0, NETLINK_USER, GFP_ATOMIC);
-        } else {
-            kfree_skb(skb);
-        }
+    DEBUG_PRINT("Collecting metrics at timestamp: %lu", 
+                current_metrics->timestamp);
+
+    // Create new skb with proper size
+    skb = nlmsg_new(NLMSG_ALIGN(sizeof(struct system_metrics)), GFP_ATOMIC);
+    if (!skb) {
+        ERROR_PRINT("Failed to allocate new skb");
+        goto out;
     }
 
-    spin_unlock(&metrics_lock);
+    // Add netlink header
+    nlh = nlmsg_put(skb, 0, 0, NLMSG_DONE, 
+                    NLMSG_ALIGN(sizeof(struct system_metrics)), 0);
+    if (!nlh) {
+        ERROR_PRINT("Failed to put nlmsg");
+        kfree_skb(skb);
+        goto out;
+    }
 
-    // Reschedule timer
-    mod_timer(&metrics_timer, jiffies + HZ);
+    // Copy data
+    memcpy(nlmsg_data(nlh), current_metrics, sizeof(struct system_metrics));
+    nlmsg_end(skb, nlh);
+
+    // Send message using multicast
+    ret = nlmsg_multicast(nl_sk, skb, 0, 1, GFP_ATOMIC);
+    if (ret < 0 && ret != -ESRCH) {
+        ERROR_PRINT("Failed to send netlink message, error: %d", ret);
+    } else {
+        DEBUG_PRINT("Netlink message sent successfully");
+    }
+
+out:
+    spin_unlock(&metrics_lock);
+    mod_timer(&metrics_timer, jiffies + HZ);  // Schedule next update
 }
+
 // Module initialization
 static int __init monitor_init(void)
 {
     struct netlink_kernel_cfg cfg = {
         .groups = 1,
+        .flags = 0,
+        .input = NULL,
+        .cb_mutex = NULL,
     };
 
+    DEBUG_PRINT("Initializing System Monitor");
+
     // Create netlink socket
-    nl_sk = netlink_kernel_create(&init_net, NETLINK_USER, &cfg);
+    nl_sk = netlink_kernel_create(&init_net, NETLINK_TEST, &cfg);
     if (!nl_sk) {
-        pr_err("System Monitor: Error creating netlink socket.\n");
+        ERROR_PRINT("Error creating netlink socket");
         return -ENOMEM;
     }
 
     // Allocate metrics structure
     current_metrics = kzalloc(sizeof(struct system_metrics), GFP_KERNEL);
     if (!current_metrics) {
-        pr_err("System Monitor: Failed to allocate metrics structure.\n");
+        ERROR_PRINT("Failed to allocate metrics structure");
         netlink_kernel_release(nl_sk);
         return -ENOMEM;
     }
@@ -287,17 +283,34 @@ static int __init monitor_init(void)
     timer_setup(&metrics_timer, metrics_timer_callback, 0);
     mod_timer(&metrics_timer, jiffies + HZ);
 
-    pr_info("System Monitor: Module loaded successfully\n");
+    DEBUG_PRINT("Module loaded successfully");
     return 0;
 }
 
 // Module cleanup
 static void __exit monitor_exit(void)
 {
-    del_timer(&metrics_timer);
-    kfree(current_metrics);
-    netlink_kernel_release(nl_sk);
-    pr_info("System Monitor: Module unloaded successfully\n");
+    DEBUG_PRINT("Cleaning up System Monitor");
+    
+    // Cancel any pending timer
+    del_timer_sync(&metrics_timer);
+
+    // Wait for any in-progress operations to complete
+    synchronize_rcu();
+
+    // Free resources
+    if (current_metrics) {
+        kfree(current_metrics);
+        current_metrics = NULL;
+    }
+
+    // Release netlink socket
+    if (nl_sk) {
+        netlink_kernel_release(nl_sk);
+        nl_sk = NULL;
+    }
+
+    DEBUG_PRINT("Module unloaded successfully");
 }
 
 module_init(monitor_init);

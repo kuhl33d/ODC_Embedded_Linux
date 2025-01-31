@@ -1,4 +1,3 @@
-/* ui/web/static/css/style.css */
 :root {
     --primary-color: #2196F3;
     --secondary-color: #1976D2;
@@ -48,6 +47,7 @@ header {
     height: 12px;
     border-radius: 50%;
     background-color: var(--warning-color);
+    transition: background-color 0.3s ease;
 }
 
 #status-indicator.connected {
@@ -69,6 +69,11 @@ header {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
 }
 
 .full-width {
@@ -78,6 +83,7 @@ header {
 .chart-container {
     height: 200px;
     margin-top: 20px;
+    position: relative;
 }
 
 .cpu-cores {
@@ -93,6 +99,11 @@ header {
     border-radius: 4px;
 }
 
+.cpu-core-label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
 .cpu-core-bar {
     height: 8px;
     background-color: var(--border-color);
@@ -104,6 +115,24 @@ header {
     height: 100%;
     background-color: var(--primary-color);
     transition: width 0.3s ease;
+}
+
+.cpu-core-bar-fill.usage-low {
+    background-color: var(--success-color);
+}
+
+.cpu-core-bar-fill.usage-medium {
+    background-color: var(--warning-color);
+}
+
+.cpu-core-bar-fill.usage-high {
+    background-color: var(--danger-color);
+}
+
+.cpu-core-value {
+    text-align: right;
+    margin-top: 5px;
+    font-size: 0.9em;
 }
 
 .memory-info {
@@ -127,19 +156,24 @@ header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 8px;
     background-color: var(--background-color);
     border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.memory-stat:hover {
+    transform: translateX(5px);
 }
 
 .table-container {
     overflow-x: auto;
+    margin-top: 20px;
 }
 
 #processes-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 #processes-table th,
@@ -154,12 +188,12 @@ header {
     font-weight: 600;
 }
 
-#processes-table tbody tr:hover {
-    background-color: var(--background-color);
+#processes-table tbody tr {
+    transition: background-color 0.2s ease;
 }
 
-.process-name {
-    font-weight: 500;
+#processes-table tbody tr:hover {
+    background-color: var(--background-color);
 }
 
 .usage-high {
@@ -172,4 +206,66 @@ header {
 
 .usage-low {
     color: var(--success-color);
+}
+
+/* DataTables customization */
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 20px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: 20px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--card-background);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: var(--primary-color);
+    color: white !important;
+    border-color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .memory-details {
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+    }
 }

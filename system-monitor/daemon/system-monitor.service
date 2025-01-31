@@ -1,0 +1,23 @@
+[Unit]
+Description=System Monitor Daemon
+After=network.target
+Requires=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/local/bin/system_monitor_daemon.py
+Restart=always
+RestartSec=3
+StandardOutput=append:/var/log/system_monitor.log
+StandardError=append:/var/log/system_monitor.error.log
+
+# Security settings
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

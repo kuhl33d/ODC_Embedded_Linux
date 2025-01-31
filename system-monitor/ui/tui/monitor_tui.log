@@ -1,0 +1,170 @@
+2025-01-31 13:59:39,744 - MonitorTUI - INFO - TUI initialized
+2025-01-31 13:59:39,745 - asyncio - DEBUG - Using selector: EpollSelector
+2025-01-31 13:59:39,832 - websockets.client - DEBUG - = connection is CONNECTING
+2025-01-31 13:59:39,833 - websockets.client - DEBUG - > GET / HTTP/1.1
+2025-01-31 13:59:39,833 - websockets.client - DEBUG - > Host: localhost:8765
+2025-01-31 13:59:39,833 - websockets.client - DEBUG - > Upgrade: websocket
+2025-01-31 13:59:39,834 - websockets.client - DEBUG - > Connection: Upgrade
+2025-01-31 13:59:39,835 - websockets.client - DEBUG - > Sec-WebSocket-Key: akGkmeHFPRUKbaxdwaVYUg==
+2025-01-31 13:59:39,835 - websockets.client - DEBUG - > Sec-WebSocket-Version: 13
+2025-01-31 13:59:39,836 - websockets.client - DEBUG - > Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-01-31 13:59:39,836 - websockets.client - DEBUG - > User-Agent: Python/3.12 websockets/12.0
+2025-01-31 13:59:39,843 - websockets.client - DEBUG - < HTTP/1.1 101 Switching Protocols
+2025-01-31 13:59:39,843 - websockets.client - DEBUG - < Upgrade: websocket
+2025-01-31 13:59:39,844 - websockets.client - DEBUG - < Connection: Upgrade
+2025-01-31 13:59:39,844 - websockets.client - DEBUG - < Sec-WebSocket-Accept: 0U4ePgoa+mthocYatAQ3owCHhD4=
+2025-01-31 13:59:39,844 - websockets.client - DEBUG - < Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-01-31 13:59:39,844 - websockets.client - DEBUG - < Date: Fri, 31 Jan 2025 11:59:39 GMT
+2025-01-31 13:59:39,844 - websockets.client - DEBUG - < Server: Python/3.12 websockets/12.0
+2025-01-31 13:59:39,845 - websockets.client - DEBUG - = connection is OPEN
+2025-01-31 13:59:39,845 - MonitorTUI - INFO - Connected to daemon
+2025-01-31 13:59:40,444 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [24, 26, 32, 29, 0, 0, 0, 0, 0, 0...2025-01-31T13:59:40"]}}' [18292 bytes]
+2025-01-31 13:59:41,533 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [26, 30, 51, 33, 0, 0, 0, 0, 0, 0...2025-01-31T13:59:41"]}}' [18339 bytes]
+2025-01-31 13:59:42,513 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [11, 6, 6, 4, 0, 0, 0, 0, 0, 0, 0...2025-01-31T13:59:42"]}}' [18384 bytes]
+2025-01-31 13:59:43,541 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:43"]}}' [18429 bytes]
+2025-01-31 13:59:44,555 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [5, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:44"]}}' [18477 bytes]
+2025-01-31 13:59:45,565 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 7, 8, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:45"]}}' [18523 bytes]
+2025-01-31 13:59:46,590 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 7, 8, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:46"]}}' [18569 bytes]
+2025-01-31 13:59:47,637 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 3, 6, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:47"]}}' [18615 bytes]
+2025-01-31 13:59:48,659 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 3, 6, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:48"]}}' [18664 bytes]
+2025-01-31 13:59:49,679 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [5, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:49"]}}' [18713 bytes]
+2025-01-31 13:59:50,686 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [7, 2, 4, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:50"]}}' [18762 bytes]
+2025-01-31 13:59:51,700 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:51"]}}' [18809 bytes]
+2025-01-31 13:59:52,827 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 2, 2, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:52"]}}' [18857 bytes]
+2025-01-31 13:59:53,853 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 8, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:53"]}}' [18905 bytes]
+2025-01-31 13:59:54,875 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 3, 6, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:54"]}}' [18983 bytes]
+2025-01-31 13:59:55,899 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 4, 7, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:55"]}}' [19016 bytes]
+2025-01-31 13:59:56,931 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:56"]}}' [19063 bytes]
+2025-01-31 13:59:58,007 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:57"]}}' [19110 bytes]
+2025-01-31 13:59:59,036 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T13:59:59"]}}' [19157 bytes]
+2025-01-31 13:59:59,844 - websockets.client - DEBUG - < PING 04 ce 6d d5 [binary, 4 bytes]
+2025-01-31 13:59:59,845 - websockets.client - DEBUG - > PONG 04 ce 6d d5 [binary, 4 bytes]
+2025-01-31 13:59:59,846 - websockets.client - DEBUG - % sending keepalive ping
+2025-01-31 13:59:59,846 - websockets.client - DEBUG - > PING ed 12 c5 8f [binary, 4 bytes]
+2025-01-31 13:59:59,850 - websockets.client - DEBUG - < PONG ed 12 c5 8f [binary, 4 bytes]
+2025-01-31 13:59:59,850 - websockets.client - DEBUG - % received keepalive pong
+2025-01-31 14:00:00,047 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 9, 14, 8, 0, 0, 0, 0, 0, 0, 0...2025-01-31T14:00:00"]}}' [19205 bytes]
+2025-01-31 14:00:01,151 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [9, 1, 5, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:01"]}}' [19251 bytes]
+2025-01-31 14:00:02,153 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:02"]}}' [19298 bytes]
+2025-01-31 14:00:03,165 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:03"]}}' [19345 bytes]
+2025-01-31 14:00:04,186 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 2, 1, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:04"]}}' [19422 bytes]
+2025-01-31 14:00:05,229 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 2, 6, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:05"]}}' [19454 bytes]
+2025-01-31 14:00:06,238 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:06"]}}' [19504 bytes]
+2025-01-31 14:00:07,247 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:07"]}}' [19551 bytes]
+2025-01-31 14:00:08,296 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 6, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:08"]}}' [19629 bytes]
+2025-01-31 14:00:09,299 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:09"]}}' [19664 bytes]
+2025-01-31 14:00:10,317 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 3, 3, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:10"]}}' [19711 bytes]
+2025-01-31 14:00:11,326 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 1, 4, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:11"]}}' [19788 bytes]
+2025-01-31 14:00:12,340 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 1, 3, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:12"]}}' [19820 bytes]
+2025-01-31 14:00:13,359 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:13"]}}' [19867 bytes]
+2025-01-31 14:00:14,369 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:14"]}}' [19914 bytes]
+2025-01-31 14:00:15,382 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [7, 6, 5, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:15"]}}' [19961 bytes]
+2025-01-31 14:00:16,409 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:16"]}}' [20008 bytes]
+2025-01-31 14:00:16,411 - websockets.client - DEBUG - = connection is CLOSING
+2025-01-31 14:00:16,411 - websockets.client - DEBUG - > CLOSE 1000 (OK) [2 bytes]
+2025-01-31 14:00:16,437 - websockets.client - DEBUG - < CLOSE 1000 (OK) [2 bytes]
+2025-01-31 14:00:16,437 - websockets.client - DEBUG - = connection is CLOSED
+2025-01-31 14:00:18,530 - MonitorTUI - INFO - TUI initialized
+2025-01-31 14:00:18,531 - asyncio - DEBUG - Using selector: EpollSelector
+2025-01-31 14:00:18,588 - websockets.client - DEBUG - = connection is CONNECTING
+2025-01-31 14:00:18,589 - websockets.client - DEBUG - > GET / HTTP/1.1
+2025-01-31 14:00:18,589 - websockets.client - DEBUG - > Host: localhost:8765
+2025-01-31 14:00:18,589 - websockets.client - DEBUG - > Upgrade: websocket
+2025-01-31 14:00:18,589 - websockets.client - DEBUG - > Connection: Upgrade
+2025-01-31 14:00:18,589 - websockets.client - DEBUG - > Sec-WebSocket-Key: JQ85hu6s5Q4LPhwe1Cva2g==
+2025-01-31 14:00:18,592 - websockets.client - DEBUG - > Sec-WebSocket-Version: 13
+2025-01-31 14:00:18,592 - websockets.client - DEBUG - > Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+2025-01-31 14:00:18,592 - websockets.client - DEBUG - > User-Agent: Python/3.12 websockets/12.0
+2025-01-31 14:00:18,616 - websockets.client - DEBUG - < HTTP/1.1 101 Switching Protocols
+2025-01-31 14:00:18,616 - websockets.client - DEBUG - < Upgrade: websocket
+2025-01-31 14:00:18,616 - websockets.client - DEBUG - < Connection: Upgrade
+2025-01-31 14:00:18,616 - websockets.client - DEBUG - < Sec-WebSocket-Accept: fR5BH6qmQ88Y2utMGk6ThCiVBqM=
+2025-01-31 14:00:18,617 - websockets.client - DEBUG - < Sec-WebSocket-Extensions: permessage-deflate; server_max_window_bits=12; client_max_window_bits=12
+2025-01-31 14:00:18,617 - websockets.client - DEBUG - < Date: Fri, 31 Jan 2025 12:00:18 GMT
+2025-01-31 14:00:18,617 - websockets.client - DEBUG - < Server: Python/3.12 websockets/12.0
+2025-01-31 14:00:18,617 - websockets.client - DEBUG - = connection is OPEN
+2025-01-31 14:00:18,617 - MonitorTUI - INFO - Connected to daemon
+2025-01-31 14:00:19,461 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [8, 7, 15, 12, 0, 0, 0, 0, 0, 0, ...2025-01-31T14:00:19"]}}' [20157 bytes]
+2025-01-31 14:00:20,473 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [7, 3, 9, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:20"]}}' [20204 bytes]
+2025-01-31 14:00:21,492 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [5, 0, 3, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:21"]}}' [20280 bytes]
+2025-01-31 14:00:22,499 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:22"]}}' [20312 bytes]
+2025-01-31 14:00:23,548 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 4, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:23"]}}' [20361 bytes]
+2025-01-31 14:00:24,559 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 1, 5, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:24"]}}' [20437 bytes]
+2025-01-31 14:00:25,624 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:25"]}}' [20499 bytes]
+2025-01-31 14:00:26,634 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 3, 6, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:26"]}}' [20531 bytes]
+2025-01-31 14:00:27,647 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 2, 3, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:27"]}}' [20608 bytes]
+2025-01-31 14:00:28,659 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 0, 2, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:28"]}}' [20640 bytes]
+2025-01-31 14:00:29,699 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:29"]}}' [20687 bytes]
+2025-01-31 14:00:30,716 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:30"]}}' [20736 bytes]
+2025-01-31 14:00:31,725 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:31"]}}' [20783 bytes]
+2025-01-31 14:00:32,771 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 2, 4, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:32"]}}' [20861 bytes]
+2025-01-31 14:00:33,777 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 1, 5, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:33"]}}' [20894 bytes]
+2025-01-31 14:00:34,799 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:34"]}}' [20972 bytes]
+2025-01-31 14:00:35,808 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:35"]}}' [21035 bytes]
+2025-01-31 14:00:36,818 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 6, 3, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:36"]}}' [21067 bytes]
+2025-01-31 14:00:37,891 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 3, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:37"]}}' [21114 bytes]
+2025-01-31 14:00:38,620 - websockets.client - DEBUG - % sending keepalive ping
+2025-01-31 14:00:38,620 - websockets.client - DEBUG - > PING 75 6c 03 ea [binary, 4 bytes]
+2025-01-31 14:00:38,622 - websockets.client - DEBUG - < PING 9a 9d 2a b1 [binary, 4 bytes]
+2025-01-31 14:00:38,622 - websockets.client - DEBUG - > PONG 9a 9d 2a b1 [binary, 4 bytes]
+2025-01-31 14:00:38,623 - websockets.client - DEBUG - < PONG 75 6c 03 ea [binary, 4 bytes]
+2025-01-31 14:00:38,623 - websockets.client - DEBUG - % received keepalive pong
+2025-01-31 14:00:38,899 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 2, 7, 8, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:38"]}}' [21163 bytes]
+2025-01-31 14:00:39,912 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 1, 2, 8, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:39"]}}' [21209 bytes]
+2025-01-31 14:00:40,929 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 4, 3, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:40"]}}' [21256 bytes]
+2025-01-31 14:00:41,943 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:41"]}}' [21332 bytes]
+2025-01-31 14:00:42,959 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:42"]}}' [21363 bytes]
+2025-01-31 14:00:43,978 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:43"]}}' [21409 bytes]
+2025-01-31 14:00:44,983 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:44"]}}' [21457 bytes]
+2025-01-31 14:00:45,996 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 5, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:45"]}}' [21502 bytes]
+2025-01-31 14:00:47,005 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 5, 2, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:46"]}}' [21550 bytes]
+2025-01-31 14:00:48,113 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 3, 4, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:48"]}}' [21599 bytes]
+2025-01-31 14:00:49,152 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:49"]}}' [21676 bytes]
+2025-01-31 14:00:50,182 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 0, 5, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:50"]}}' [21739 bytes]
+2025-01-31 14:00:51,201 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 4, 6, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:51"]}}' [21772 bytes]
+2025-01-31 14:00:52,208 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 2, 12, 2, 0, 0, 0, 0, 0, 0, 0...2025-01-31T14:00:52"]}}' [21822 bytes]
+2025-01-31 14:00:53,220 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:53"]}}' [21897 bytes]
+2025-01-31 14:00:54,236 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 5, 4, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:54"]}}' [21929 bytes]
+2025-01-31 14:00:55,251 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 3, 5, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:55"]}}' [21978 bytes]
+2025-01-31 14:00:56,275 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 2, 7, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:56"]}}' [22024 bytes]
+2025-01-31 14:00:57,274 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [11, 9, 20, 13, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:57"]}}' [22078 bytes]
+2025-01-31 14:00:58,313 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 2, 6, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:58"]}}' [22120 bytes]
+2025-01-31 14:00:58,627 - websockets.client - DEBUG - % sending keepalive ping
+2025-01-31 14:00:58,627 - websockets.client - DEBUG - > PING '5\x05bz' [text, 4 bytes]
+2025-01-31 14:00:58,629 - websockets.client - DEBUG - < PING 2d 6c 5d ea [binary, 4 bytes]
+2025-01-31 14:00:58,629 - websockets.client - DEBUG - > PONG 2d 6c 5d ea [binary, 4 bytes]
+2025-01-31 14:00:58,630 - websockets.client - DEBUG - < PONG '5\x05bz' [text, 4 bytes]
+2025-01-31 14:00:58,630 - websockets.client - DEBUG - % received keepalive pong
+2025-01-31 14:00:59,339 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:00:59"]}}' [22167 bytes]
+2025-01-31 14:01:00,366 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [5, 5, 1, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:00"]}}' [22216 bytes]
+2025-01-31 14:01:01,438 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:01"]}}' [22263 bytes]
+2025-01-31 14:01:02,429 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 8, 4, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:02"]}}' [22310 bytes]
+2025-01-31 14:01:03,449 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 4, 2, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:03"]}}' [22387 bytes]
+2025-01-31 14:01:04,475 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 5, 2, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:04"]}}' [22421 bytes]
+2025-01-31 14:01:05,489 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:05"]}}' [22469 bytes]
+2025-01-31 14:01:06,575 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:06"]}}' [22515 bytes]
+2025-01-31 14:01:07,631 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 6, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:07"]}}' [22565 bytes]
+2025-01-31 14:01:08,633 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:08"]}}' [22612 bytes]
+2025-01-31 14:01:09,652 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [4, 5, 2, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:09"]}}' [22660 bytes]
+2025-01-31 14:01:10,881 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [0, 2, 4, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:10"]}}' [22738 bytes]
+2025-01-31 14:01:11,901 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 1, 6, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:11"]}}' [22773 bytes]
+2025-01-31 14:01:12,924 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:12"]}}' [22820 bytes]
+2025-01-31 14:01:13,952 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 1, 5, 1, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:13"]}}' [22868 bytes]
+2025-01-31 14:01:14,994 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 4, 2, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:14"]}}' [22916 bytes]
+2025-01-31 14:01:16,132 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [3, 3, 1, 3, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:16"]}}' [22964 bytes]
+2025-01-31 14:01:17,138 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 3, 6, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:17"]}}' [23014 bytes]
+2025-01-31 14:01:18,157 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [6, 2, 9, 2, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:18"]}}' [23063 bytes]
+2025-01-31 14:01:18,633 - websockets.client - DEBUG - % sending keepalive ping
+2025-01-31 14:01:18,634 - websockets.client - DEBUG - > PING 9f 62 29 1a [binary, 4 bytes]
+2025-01-31 14:01:18,636 - websockets.client - DEBUG - < PONG 9f 62 29 1a [binary, 4 bytes]
+2025-01-31 14:01:18,636 - websockets.client - DEBUG - % received keepalive pong
+2025-01-31 14:01:18,637 - websockets.client - DEBUG - < PING af 7b 4a 70 [binary, 4 bytes]
+2025-01-31 14:01:18,637 - websockets.client - DEBUG - > PONG af 7b 4a 70 [binary, 4 bytes]
+2025-01-31 14:01:19,175 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [5, 3, 9, 11, 0, 0, 0, 0, 0, 0, 0...2025-01-31T14:01:19"]}}' [23111 bytes]
+2025-01-31 14:01:20,192 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [1, 3, 3, 5, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:20"]}}' [23158 bytes]
+2025-01-31 14:01:21,302 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 1, 3, 4, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:21"]}}' [23206 bytes]
+2025-01-31 14:01:22,319 - websockets.client - DEBUG - < TEXT '{"cpu_usage": [2, 4, 5, 6, 0, 0, 0, 0, 0, 0, 0,...2025-01-31T14:01:22"]}}' [23255 bytes]
+2025-01-31 14:01:22,325 - websockets.client - DEBUG - = connection is CLOSING
+2025-01-31 14:01:22,326 - websockets.client - DEBUG - > CLOSE 1000 (OK) [2 bytes]
+2025-01-31 14:01:22,330 - websockets.client - DEBUG - < CLOSE 1000 (OK) [2 bytes]
+2025-01-31 14:01:22,330 - websockets.client - DEBUG - = connection is CLOSED
